@@ -1,0 +1,28 @@
+site_name: nbapr
+site_url: https://sansbacon.github.io/nbapr/
+site_description: simulation-based nba player rater in python
+site_author: Eric Truett
+repo_url: https://github.com/sansbacon/nbapr
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings
+
+markdown_extensions:
+- toc:
+    permalink: true
+- admonition
+- codehilite
+- extra
+- pymdownx.superfences
+- pymdownx.tabbed
+
+nav:
+- nbapr: index.md
+- history-design-future.md
+- Code Reference:
+    - nbapr: nbapr-reference.md
+
