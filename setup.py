@@ -28,6 +28,9 @@ setup(
     keywords='nbafantasy',
     name='nbapr',
     packages=find_packages(),
+    entry_points={
+          'console_scripts': ['nbapr=npapr.scripts.run-fbasim:run']
+    },
     url='https://github.com/sansbacon/nbapr',
     version='0.1.0',
     zip_safe=False,

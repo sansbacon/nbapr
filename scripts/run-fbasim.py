@@ -7,9 +7,11 @@ import sys
 
 import click
 import pandas as pd
-from nbafantasy.fbasim import load_data, sim, parallelsim, html_table
+from nbapr import sim, parallelsim
+
 
 logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+
 
 EIGHT_CAT_RANK_COLS = ['FGP_RK', 'FTP_RK', 'FG3M_RK', 'REB_RK', 'AST_RK',
                    'STL_RK', 'BLK_RK', 'PTS_RK', 'TOT_RK']
@@ -28,6 +30,11 @@ TIM_INITIAL_COLS = ['PLAYER_ID', 'FGM', 'FGA', 'FTM', 'FG3M', 'REB',
 
 TIM_RANK_COLS = ['FGP_RK', 'FTM_RK', 'FG3M_RK', 'REB_RK', 'AST_RK',
            'STL_RK', 'BLK_RK', 'TOV_RK', 'PTS_RK', 'TOT_RK']
+
+
+def load_data(*args, **kwargs):
+    """TODO: implement this function"""
+    pass
 
 
 @click.command()
@@ -92,24 +99,6 @@ def run(n, season_code, league_type, thresh_min, thresh_gp, last_n, since_n, per
                 results[col] = results[col] - (len(rk_cols)-1)*colavg               
             else:
                 results[col] = results[col] - colavg
-
-    if not width:
-        try:
-            import tkinter
-            root = tkinter.Tk()
-            width = root.winfo_screenwidth()
-        except:
-            width = 1000
-
-    if html:
-        logging.info('creating web page')
-        import webbrowser
-        import os
-        from urllib.request import pathname2url
-
-        html_table(html, results[displaycol])
-        url = 'file:{}'.format(pathname2url(os.path.abspath(html)))
-        webbrowser.open_new(url)
 
     logging.info('creating dataframe')
     with pd.option_context( 'display.max_rows', maxrows, 'display.max_columns', maxcols, 'display.width', width):
