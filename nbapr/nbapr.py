@@ -8,68 +8,40 @@ import logging
 from multiprocessing import Pool
 import sys
 
-import click
 import numpy as np
 import pandas as pd
-
-from nba.nbacom import Scraper, Parser
-from nba.season import current_season_code
+from scipy.stats import rankdata
 
 
-def load_data(season_code, per_mode, lastn, sincen, thresh_gp, thresh_min,
-              adjust_to=False, sortcol=None, fn=None):
-    '''
-    Loads data from nba.com or csv file
+def _npbased():
+    """numpy-based approach"""
+    # third dimension
+    n_leagues = 50
 
-    Args:
-        season_code (str): '2017-18', etc.
-        per_mode (str): 'Totals', 'PerGame', 'Per48'
-        lastn (int): last number of games, default 0
-        sincen (str): games since specific date, default ''
-        thresh_gp (int): minimum number of games played, default 0
-        thresh_min (int): minimum number of minutes played, default 0
-        adjust_to (bool): make turnovers negative (for ranking purposes, may be easier)
-        sortcol (str): sort, default None
-        fn (str): filename of csv, default None
+    # rows in each rank operation
+    n_teams = 12
 
-    Returns:
-        pandas.DataFrame
+    # rows columns in each split
+    n_players = 10
+    n_categories = 8
 
-    '''
-    if fn:    
-        logging.info('reading data from file')
-        df = pd.read_csv(fn)
-    else:
-        logging.info('getting data from web')
-        scraper = Scraper(cache_name='fbasim')
-        parser = Parser()
-        content = scraper.playerstats(season_code=season_code, per_mode=per_mode, last_n=lastn, date_from=sincen)
-        logging.info('cleaning up dataframe')
-        df = pd.DataFrame(parser.playerstats(content, per_mode))       
-        df['MIN'] = df['MIN'].astype(int)
-        df = df.rename(index=str, columns={"TEAM_ABBREVIATION": "TEAM"})
+    # create initial teams
+    # is ndarray with shape (n_leagues, n_players * n_teams, n_categories)
+    teamstats = np.random.randint(1, 10, size=n_leagues * n_teams * n_categories * n_players).reshape(n_leagues, n_teams * n_players, n_categories)
 
-    # account for gp & minutes thresholds
-    logging.info('applying thresholds')
-    if thresh_gp and thresh_min:
-        crit = (df.GP >= thresh_gp) & (df.MIN >= thresh_min)
-        df = df[crit]
-    elif thresh_gp:
-        crit = df.GP >= thresh_gp
-        df = df[crit]
-    elif thresh_min:
-        crit = df.MIN >= thresh_min
-        df = df[crit]
+    # teamarr is a 3d array 10 (arrays) x 10 (rows) x 8 (cols)
+    teamsums = teamstats.reshape(-1, n_players, teamstats.shape[-1]).sum(1).reshape(-1, n_teams, n_categories)
 
-    if adjust_to:
-        df['TOV'] = 0 - df['TOV']
+    # get team ranks
+    teamranks = rankdata(teamsums, axis=1)
 
-    if sortcol:
-        return df.sort_values(sortcol, ascending=False)
-    else:
-        return df
+    # get team scores
+    teamscores = teamranks.sum(axis=-1)
 
-   
+    # get average score
+    teamscores.mean(axis=0)
+
+
 def _psim(playersdf, i, chunkn, initialcols, numteams, sizeteams):
     '''
     Function to multiprocess
@@ -287,50 +259,6 @@ def sim(dfpool, initialcols, n, numteams=10, sizeteams=10):
                     on='PLAYER_ID')
     return simdf.sort_values('TOT_RK', ascending=False)
 
-
-def html_table(fn, df):
-        '''
-        Outputs an html table
-        
-        Args:
-            fn (str): filename to save 
-            df (DataFrame): the dataframe to create html from
-
-        Returns:
-            None
-
-        '''
-        page = '''<html>
-                  <head>
-                    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
-                    <script src="https://code.jquery.com/jquery-3.3.1.min.js" 
-                      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-                  </head>
-                  <body>
-                      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
-                      <script type="text/javascript">
-                        $(document).ready(function() {
-                          $('#sim').DataTable( {
-                            "iDisplayLength": 100,  
-                            "order": [|idx|, 'desc'],
-                            "columnDefs": [
-                                {"className": "dt-center", "targets": "_all"}
-                              ]
-                          } );
-                        } );
-                      </script>
-                      |TABLE|
-                  </body>
-                  </html>'''
-
-        # if leave in NaN, then sort will display NaN first
-        df = df.fillna(-100)
-        html = df.to_html(border=0,
-                          index=False,
-                          classes='compact display" id = "sim')
-
-        with open(fn, 'w') as outfile:
-            outfile.write(page.replace('|TABLE|', html).replace('|idx|', str(len(df.columns) - 1)))
 
 
 if __name__ == '__main__':
