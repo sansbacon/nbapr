@@ -1,264 +1,205 @@
+# nbapr/nbapr/nbapr.py
 # -*- coding: utf-8 -*-
-'''
-fbasim.py
-functions for simulating fantasy NBA season
-'''
+# Copyright (C) 2021 Eric Truett
+# Licensed under the MIT License
 
 import logging
-from multiprocessing import Pool
-import sys
+import time
+from typing import Iterable
 
 import numpy as np
 import pandas as pd
 from scipy.stats import rankdata
 
 
-def _npbased():
-    """numpy-based approach"""
-    # third dimension
-    n_leagues = 50
-
-    # rows in each rank operation
-    n_teams = 12
-
-    # rows columns in each split
-    n_players = 10
-    n_categories = 8
-
-    # create initial teams
-    # is ndarray with shape (n_leagues, n_players * n_teams, n_categories)
-    teamstats = np.random.randint(1, 10, size=n_leagues * n_teams * n_categories * n_players).reshape(n_leagues, n_teams * n_players, n_categories)
-
-    # teamarr is a 3d array 10 (arrays) x 10 (rows) x 8 (cols)
-    teamsums = teamstats.reshape(-1, n_players, teamstats.shape[-1]).sum(1).reshape(-1, n_teams, n_categories)
-
-    # get team ranks
-    teamranks = rankdata(teamsums, axis=1)
-
-    # get team scores
-    teamscores = teamranks.sum(axis=-1)
-
-    # get average score
-    teamscores.mean(axis=0)
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 
-def _psim(playersdf, i, chunkn, initialcols, numteams, sizeteams):
-    '''
-    Function to multiprocess
+def _timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        if 'log_time' in kw:
+            name = kw.get('log_name', method.__name__.upper())
+            kw['log_time'][name] = int((te - ts) * 1000)
+        else:
+            logging.info('%r  %2.2f ms' % \
+                  (method.__name__, (te - ts) * 1000))
+        return result
+    return timed
+
+
+@_timeit
+def _multidimensional_shifting(elements: Iterable, 
+                              num_samples: int, 
+                              sample_size: int, 
+                              probs: Iterable) -> np.ndarray:
+    """Based on https://medium.com/ibm-watson/incredibly-fast-random-sampling-in-python-baf154bd836a
     
     Args:
-        playersdf (DataFrame):
-        i (int): simID
-        chunkn (int): n for this process
-        initialcols (list): str col names
-        numteams (int): number of teams in league
-        sizeteams (int): number of players per team
+        elements (iterable): iterable to sample from, typically a dataframe index
+        num_samples (int): the number of rows (e.g. initial population size)
+        sample_size (int): the number of columns (e.g. team size)
+        probs (iterable): is same size as elements
+
+    Returns:
+        ndarray: of shape (num_samples, sample_size)
         
-    '''
-    # setup variables
-    groupcol = ['simID', 'iterID', 'teamID']
-    agg_cols_exclude = ['PLAYER_ID'] # don't want to sum player ids
-    nplayers = len(playersdf)
+    """
+    replicated_probabilities = np.tile(probs, (num_samples, 1))
+    random_shifts = np.random.random(replicated_probabilities.shape)
+    random_shifts /= random_shifts.sum(axis=1)[:, np.newaxis]
+    shifted_probabilities = random_shifts - replicated_probabilities
+    samples = np.argpartition(shifted_probabilities, sample_size, axis=1)[:, :sample_size]
+    return elements.to_numpy()[samples]
 
 
-    # preallocate teams
-    # have the groupcol (simID, iterID, teamID) + the initial columns
-    size = numteams * sizeteams
-    teams = np.zeros(shape=(chunkn * size, len(initialcols) + len(groupcol)),
-                     dtype=int)
-
-    # this assigns simID to the first column
-    teams[:, 0] = i
-
-    # this assigns iterID
-    # will have 100 repeats of 0 through n
-    teams[:, 1] = np.repeat(np.arange(0, chunkn), size)
-
-    # this assigns teamid to the third column
-    # need to repeat 0-9, then tile that 100-element array n times
-    teams[:, 2] = np.tile(A=np.repeat(np.arange(0, sizeteams), numteams),
-                          reps=chunkn)
-
-    # now assign players to teams
-    # use size to determine the slice
-    start = 0
-    end = size
-    for i in range(0, chunkn):
-        idx = np.random.randint(0, nplayers, size)
-        teams[start:end, 3:] = playersdf.values[idx, :]
-        start += size
-        end += size
-
-    # setup df for teams from numpy array
-    # use pandas b/c not aware of groupby in numpy
-    dfteams = pd.DataFrame(teams)
-    dfteams.columns = groupcol + initialcols
-
-    # dfteamtot holds the team sums in each category
-    # have to calculate FGP and FTP, if needed
-    agg_dict = {k:np.sum for k in initialcols if k not in agg_cols_exclude}
-    dfteamtot = dfteams.groupby(groupcol).aggregate(agg_dict)
-    if 'FGM' in initialcols and 'FGA' in initialcols:
-        dfteamtot['FGP'] = dfteamtot['FGM'] / dfteamtot['FGA']
-    if 'FTM' in initialcols and 'FTA' in initialcols:
-        dfteamtot['FTP'] = dfteamtot['FTM'] / dfteamtot['FTA']
-
-    # figure out the stats columns - have to adjust for %
-    statcols = [c for c in initialcols if c not in agg_cols_exclude]
-    if 'FGM' and 'FGA' in statcols:
-        statcols.append('FGP')
-        statcols = [c for c in statcols if c not in ['FGM', 'FGA']]       
-    if 'FTM' and 'FTA' in statcols:
-        statcols.append('FTP')
-        statcols = [c for c in statcols if c not in ['FTM', 'FTA']]
-    
-    # groupby ranking
-    # TODO: this is where all the time goes, can speed up?
-    # Might be faster to have one function that does all ranks
-    # Can also look at inverting turnovers so can do same for all columns
-    rankcols = ['{}_RK'.format(col) for col in statcols]
-    for statcol, rankcol in zip(statcols, rankcols):
-        if statcol == 'TOV':
-            dfteamtot[rankcol] = dfteamtot.groupby('iterID').aggregate(statcol).rank(ascending=False)
-        else:
-            dfteamtot[rankcol] = dfteamtot.groupby('iterID').aggregate(statcol).rank()
-    dfteamtot['TOT_RK'] = dfteamtot[rankcols].sum(axis=1)
-    rankcols.append('TOT_RK')
-    return dfteams.join(dfteamtot[rankcols], on=groupcol, how='left')
-    
-
-def parallelsim(dfpool, initialcols, n, numproc, 
-                numteams=10, sizeteams=10):
-    '''
-    Simulate nba fantasy team using pool of workers
-    
+@_timeit
+def _create_player_points(
+        pool: pd.DataFrame, 
+        teams: np.ndarray,
+        n_iterations: int,
+        n_teams: int,
+        n_players: int,
+        team_points: np.ndarray
+    ) -> np.ndarray:
+    """Calculates playerpoints
+       
     Args:
-        dfpool (DataFrame): DataFrame of playerpool
-        initialcols (list): list of columns, must have int 'PLAYER_ID'
-        n (int): number of iterations
-        numproc (int): number of processes
-        numteams (int): number of teams in league
-        sizeteams (int): number of players on team
+        pool (pd.DataFrame): the player pool
+        statscols (Iterable[str]): the statistics columns
+        teams (np.ndarray): the teams
 
     Returns:
-        DataFrame
+        np.ndarray
+        
+    """
 
-    '''   
-    # ensure relevant columns are integers (for numpy)
-    dfpool.set_index('PLAYER_ID')
-    playersdf = dfpool[initialcols].astype(np.int)
+    # now need to link back to players
+    players = pool.index.values
 
-    with Pool(processes=numproc) as pool:
-        interim = [pool.apply_async(_psim, 
-                    (playersdf, i, int(n/numproc), initialcols,
-                     numteams, sizeteams))
-                    for i in range(numproc)]
-        results = pd.concat([result.get() for result in interim]) 
+    # once we've calculated stats, can remove league dimension from teams
+    # is just a 2D array of teams
+    # if you flatten teampoints, get 1D array lines up with 2D teams
+    teams2d = teams.reshape(n_iterations * n_teams, n_players)
+    team_points1d = team_points.ravel()
+
+    # creates array of shape (len(teams2d), len(players))
+    # is effectively one hot encoder for player indexes
+    # if player index 3 is on team 0, then on_team[0, 3] == 1
+    on_team = (players[...,None]==teams2d[:,None,:]).any(-1).astype(int)
+
+    # now we can calculate player points by multiplying
+    # matrix of zeroes and ones with team points
+    return on_team * team_points1d[:, np.newaxis]
+
+
+@_timeit
+def _create_teams(
+        pool: pd.DataFrame, 
+        n_iterations: int = 500, 
+        n_teams: int = 10, 
+        n_players: int = 10,
+        probcol: str = 'probs'
+    ) -> np.ndarray:
+    """Creates initial set of teams
     
-   # calculate player mean for each category
-    rankcols = [c for c in results.columns if '_RK' in c]
-    rank_dict = {k:np.mean for k in rankcols}
-    simdf = dfpool.join(results.groupby('PLAYER_ID')
-                  .aggregate(rank_dict).round(1), on='PLAYER_ID')
-    return simdf.sort_values('TOT_RK', ascending=False)
-
-
-def sim(dfpool, initialcols, n, numteams=10, sizeteams=10):
-    '''
-    Simulate nba fantasy season
     
+    Returns:
+        np.ndarray of shape
+          axis 0 - number of iterations
+          axis 1 - number of teams in league
+          axis 2 - number of players on team
+    """
+    # get the teams, which are represented as 3D array
+    # axis 0 = number of iterations (leagues)
+    # axis 1 = number of teams in league
+    # axis 2 = number of players on team
+    arr = _multidimensional_shifting(pool.index, n_iterations, n_teams * n_players, pool[probcol])
+    return arr.reshape(n_iterations, n_teams, n_players)
+
+
+@_timeit
+def _create_teamstats(
+        pool: pd.DataFrame, 
+        statscols: Iterable[str],
+        teams: np.ndarray
+    ) -> np.ndarray:
+    """Calculates team statistics
+       
     Args:
-        dfpool (DataFrame): DataFrame of playerpool
-        initialcols (list): list of columns, must have int 'PLAYER_ID'
-        n (int): number of iterations
-        numteams (int): number of teams in league
-        sizeteams (int): number of players on team
+        pool (pd.DataFrame): the player pool
+        statscols (Iterable[str]): the statistics columns
+        teams (np.ndarray): the teams
 
     Returns:
-        DataFrame
+        np.ndarray
+        
+    """
+    # get the player stats as a 2D array
+    stats_mda = pool.loc[:, statscols].values
 
-    '''
-    # initial setup
-    logging.info('starting sim')
-    dfpool.set_index('PLAYER_ID')
-    size = numteams * sizeteams
-    nplayers = len(dfpool)
-    groupcol = ['simID', 'iterID', 'teamID']
-    agg_cols_exclude = ['PLAYER_ID'] # don't want to sum player ids
+    # now get the team stats
+    # has shape (n_iterations, n_teams, n_players, len(statcols))
+    team_stats = stats_mda[teams] 
     
-    # ensure relevant columns are integers (for numpy)
-    playersdf = dfpool[initialcols].astype(np.int)
+    # sum along axis 2 to get team totals
+    # has shape (n_iterations, n_teams, len(statcols))
+    return np.sum(team_stats, axis=2)
 
-    # preallocate teams
-    # have the groupcol (simID, iterID, teamID) + the initial columns
-    teams = np.zeros(shape=(n * size, len(initialcols) + len(groupcol)), dtype=int)
 
-    # this assigns simID to the first column
-    teams[:, 0] = 1
-
-    # this assigns iterID
-    # will have 100 repeats of 0 through n
-    teams[:, 1] = np.repeat(np.arange(0, n), size)
-
-    # this assigns teamid to the third column
-    # need to repeat 0-9, then tile that 100-element array n times
-    teams[:, 2] = np.tile(A=np.repeat(np.arange(0, sizeteams), numteams), reps=n)
-
-    # now assign players to teams
-    # use size to determine the slice
-    start = 0
-    end = size
-    for i in range(0, n):
-        idx = np.random.randint(0, nplayers, size)
-        teams[start:end, 3:] = playersdf.values[idx, :]
-        start += size
-        end += size
-
-    # setup df for teams from numpy array
-    # use pandas b/c not aware of groupby in numpy
-    dfteams = pd.DataFrame(teams)
-    dfteams.columns = groupcol + initialcols
-
-    # dfteamtot holds the team sums in each category
-    # have to calculate FGP and FTP, if needed
-    agg_dict = {k:np.sum for k in initialcols if k not in agg_cols_exclude}
-    dfteamtot = dfteams.groupby(groupcol).aggregate(agg_dict)
-    if 'FGM' in initialcols and 'FGA' in initialcols:
-        dfteamtot['FGP'] = dfteamtot['FGM'] / dfteamtot['FGA']
-    if 'FTM' in initialcols and 'FTA' in initialcols:
-        dfteamtot['FTP'] = dfteamtot['FTM'] / dfteamtot['FTA']
-
-    # figure out the stats columns - have to adjust for %
-    statcols = [c for c in initialcols if c not in agg_cols_exclude]
-    if 'FGM' and 'FGA' in statcols:
-        statcols.append('FGP')
-        statcols = [c for c in statcols if c not in ['FGM', 'FGA']]       
-    if 'FTM' and 'FTA' in statcols:
-        statcols.append('FTP')
-        statcols = [c for c in statcols if c not in ['FTM', 'FTA']]
+@_timeit
+def sim(pool: pd.DataFrame, 
+        n_iterations: int = 500, 
+        n_teams: int = 10, 
+        n_players: int = 10,
+        statscols: Iterable[str] = ('WFGP', 'WFTP', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'PTS'),
+        probcol: str = 'probs'
+        ) -> pd.DataFrame:
+    """Simulates NBA fantasy season
     
-    # groupby ranking
-    # TODO: this is where all the time goes, can speed up?
-    # Might be faster to have one function that does all ranks
-    # Can also look at inverting turnovers so can do same for all columns
-    rankcols = ['{}_RK'.format(col) for col in statcols]
-    for statcol, rankcol in zip(statcols, rankcols):
-        if statcol == 'TOV':
-            dfteamtot[rankcol] = dfteamtot.groupby('iterID').aggregate(statcol).rank(ascending=False)
-        else:
-            dfteamtot[rankcol] = dfteamtot.groupby('iterID').aggregate(statcol).rank()
-    dfteamtot['TOT_RK'] = dfteamtot[rankcols].sum(axis=1)
-    rankcols.append('TOT_RK')
-    
-    # join rank columns to teams
-    results = dfteams.join(dfteamtot[rankcols], on=groupcol, how='left')
-    
-    # calculate player mean for each category
-    rank_dict = {k:np.mean for k in rankcols}
-    simdf = dfpool.join(results.groupby('PLAYER_ID').aggregate(rank_dict).round(1),
-                    on='PLAYER_ID')
-    return simdf.sort_values('TOT_RK', ascending=False)
+    Args:
+        pool (pd.DataFrame): the player pool dataframe
+        n_iterations (int): number of leagues to simulate, default 500
+        n_teams (int): number of teams per league, default 10
+        n_players (int): number of player per team, default 10
+        statscols (Iterable[str]): the stats columns
+        probcol (str): the column name with probabilities for sampling
 
+    Returns:
+        pd.DataFrame with columns
+           player[str], pts[float]
+
+    """
+    # get the teams, which are represented as 3D array
+    # axis 0 = number of iterations (leagues)
+    # axis 1 = number of teams in league
+    # axis 2 = number of players in team
+    teams = _create_teams(pool.index, n_iterations, n_teams * n_players, pool[probcol])
+    
+    # stats_mda is shape(len(players), len(statcols)
+    # so each row is a player's stats in those categories
+    # row_index == index in the players dataframe
+    team_stats_totals = _create_teamstats(pool, statscols, teams)
+
+    # calculate ranks and sum them
+    # team_ranks has same shape as team_totals (n_iterations, n_teams, len(statcols))
+    team_ranks = rankdata(team_stats_totals, method='average', axis=1)
+
+    # team_points is sum of team ranks along axis 2
+    # has shape (n_iterations, n_teams)
+    team_points = np.sum(team_ranks, axis=2)
+    
+    # now need to link back to players
+    player_points = _create_player_points(pool, teams, n_iterations, n_teams, n_players, team_points)
+
+    # have convert 0 to nan so can calculate true average
+    player_points[player_points == 0] = np.nan
+    player_mean = np.nanmean(player_points, axis=0)
+
+    # return results
+    return pd.DataFrame({'player': pool.PLAYER_NAME.values, 'pts': player_mean})
 
 
 if __name__ == '__main__':
