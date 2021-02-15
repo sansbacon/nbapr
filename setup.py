@@ -10,7 +10,7 @@ def run():
         name='nbapr',
         packages=find_packages(),
         entry_points={
-            'console_scripts': ['sim=scripts.runfbasim:run'],
+            'console_scripts': ['sim=scripts.runfbasim:run', 'update=scripts.update_datafiles:run'],
         },
         url='https://github.com/sansbacon/nbapr',
         version='0.1.0',
