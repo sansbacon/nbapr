@@ -8,6 +8,7 @@ import sys
 import click
 import pandas as pd
 from nbapr import sim
+from nbapr.stats import _clean_stats
 
 
 EIGHT_CAT_STATS = ['WFGP', 'WFTP', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'PTS']
@@ -40,7 +41,7 @@ def run(pool_file, n_iterations, n_teams, n_players, league_type):
         pool = pd.read_csv(pool_file)
     except:
         pool = pd.read_pickle(pool_file)        
-    
+
     # run sim with specified parameters
     results = sim(
         pool=pool, 

@@ -9,17 +9,17 @@ import pytest
 from nbapr.nbapr import _create_teams, _create_teamstats
 
 
-def test_create_teams(clean_pool):
+def test_create_teams(pool, tprint):
     """Tests _create_teams"""
-    teams = _create_teams(clean_pool)
+    teams = _create_teams(pool)
     assert isinstance(teams, np.ndarray)
+    tprint(teams)
 
-
-def test_create_teamstats(clean_pool):
+def test_create_teamstats(pool):
     """Tests _create_teamstats"""
     statscols = ('WFGP', 'FTM', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'PTS', 'TOV')
-    teams = _create_teams(clean_pool)
-    ts = _create_teamstats(clean_pool, statscols, teams)
+    teams = _create_teams(pool)
+    ts = _create_teamstats(pool, statscols, teams)
     assert isinstance(ts, np.ndarray)
 
 

@@ -9,11 +9,6 @@ from nbapr.stats import _clean_stats
 
 
 @pytest.fixture
-def clean_pool(pool):
-    return _clean_stats(pool)
-    
-
-@pytest.fixture
 def pool(test_directory):
     return pd.read_csv(test_directory / 'pool.csv')
 

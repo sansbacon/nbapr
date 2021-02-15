@@ -32,9 +32,9 @@ def _timeit(method):
 
 @_timeit
 def _multidimensional_shifting(elements: Iterable, 
-                              num_samples: int, 
-                              sample_size: int, 
-                              probs: Iterable) -> np.ndarray:
+                               num_samples: int, 
+                               sample_size: int, 
+                               probs: Iterable) -> np.ndarray:
     """Based on https://medium.com/ibm-watson/incredibly-fast-random-sampling-in-python-baf154bd836a
     
     Args:
@@ -52,7 +52,7 @@ def _multidimensional_shifting(elements: Iterable,
     random_shifts /= random_shifts.sum(axis=1)[:, np.newaxis]
     shifted_probabilities = random_shifts - replicated_probabilities
     samples = np.argpartition(shifted_probabilities, sample_size, axis=1)[:, :sample_size]
-    return elements.to_numpy()[samples]
+    return elements[samples]
 
 
 @_timeit
@@ -115,8 +115,14 @@ def _create_teams(
     # get the teams, which are represented as 3D array
     # axis 0 = number of iterations (leagues)
     # axis 1 = number of teams in league
-    # axis 2 = number of players on team
-    arr = _multidimensional_shifting(pool.index, n_iterations, n_teams * n_players, pool[probcol])
+    # axis 2 = number of players on team   
+    arr = _multidimensional_shifting(
+        elements=pool.index.values, 
+        num_samples=n_iterations, 
+        sample_size=n_teams * n_players, 
+        probs=pool[probcol]
+    )
+
     return arr.reshape(n_iterations, n_teams, n_players)
 
 
@@ -176,7 +182,7 @@ def sim(pool: pd.DataFrame,
     # axis 0 = number of iterations (leagues)
     # axis 1 = number of teams in league
     # axis 2 = number of players in team
-    teams = _create_teams(pool.index, n_iterations, n_teams * n_players, pool[probcol])
+    teams = _create_teams(pool, n_iterations, n_teams, n_players)
     
     # stats_mda is shape(len(players), len(statcols)
     # so each row is a player's stats in those categories
