@@ -17,7 +17,7 @@ def run():
     # run sim with specified parameters
     results = sim(
         pool=pool, 
-        n_iterations=10000, 
+        n_iterations=500, 
         n_teams=10, 
         n_players=12
     )
