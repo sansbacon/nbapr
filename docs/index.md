@@ -4,9 +4,9 @@ nbapr is a python-based player rater for nba fantasy. It uses simulation rather 
 
 ---
 
-**Documentation**: <a href="https://sansbacon.github.io/pangadfs/">https://sansbacon.github.io/pangadfs/</a>
+**Documentation**: <a href="https://sansbacon.github.io/nbapr/">https://sansbacon.github.io/nbapr/</a>
 
-**Source Code**: <a href="https://github.com/sansbacon/pangadfs" target="_blank">https://github.com/sansbacon/pangadfs</a>
+**Source Code**: <a href="https://github.com/sansbacon/nbapr" target="_blank">https://github.com/sansbacon/nbapr</a>
 
 ---
 
