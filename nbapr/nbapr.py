@@ -5,11 +5,10 @@
 
 import logging
 import time
-from typing import Iterable
+from typing import Iterable, Union
 
 import numpy as np
 import pandas as pd
-from scipy.stats import rankdata
 
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
@@ -53,6 +52,66 @@ def _multidimensional_shifting(elements: Iterable,
     shifted_probabilities = random_shifts - replicated_probabilities
     samples = np.argpartition(shifted_probabilities, sample_size, axis=1)[:, :sample_size]
     return elements[samples]
+
+
+def rankdata(a: np.ndarray, method: str = 'average', *, axis: Union[None, int] = None) -> np.ndarray:
+    """Assign ranks to data, dealing with ties appropriately.
+    
+    Args:
+        a (np.ndarray): the array of values to be ranked.
+        method (str): {'average', 'min', 'max', 'dense', 'ordinal'}, optional
+        axis: Union[None, int], optional
+    
+    Returns:
+        ndarray
+        Size equal to the size of `a`, containing rank scores.
+
+    """
+    # NOTE: this is from scipy 1.6.0 to avoid importing full library
+    #       not a problem on local machine but slows github builds 
+
+    if method not in ('average', 'min', 'max', 'dense', 'ordinal'):
+        raise ValueError('unknown method "{0}"'.format(method))
+
+    if axis is not None:
+        a = np.asarray(a)
+        if a.size == 0:
+            # The return values of `normalize_axis_index` are ignored.  The
+            # call validates `axis`, even though we won't use it.
+            # use scipy._lib._util._normalize_axis_index when available
+            np.core.multiarray.normalize_axis_index(axis, a.ndim)
+            dt = np.float64 if method == 'average' else np.int_
+            return np.empty(a.shape, dtype=dt)
+        return np.apply_along_axis(rankdata, axis, a, method)
+
+    arr = np.ravel(np.asarray(a))
+    algo = 'mergesort' if method == 'ordinal' else 'quicksort'
+    sorter = np.argsort(arr, kind=algo)
+
+    inv = np.empty(sorter.size, dtype=np.intp)
+    inv[sorter] = np.arange(sorter.size, dtype=np.intp)
+
+    if method == 'ordinal':
+        return inv + 1
+
+    arr = arr[sorter]
+    obs = np.r_[True, arr[1:] != arr[:-1]]
+    dense = obs.cumsum()[inv]
+
+    if method == 'dense':
+        return dense
+
+    # cumulative counts of each unique value
+    count = np.r_[np.nonzero(obs)[0], len(obs)]
+
+    if method == 'max':
+        return count[dense]
+
+    if method == 'min':
+        return count[dense - 1] + 1
+
+    # average method
+    return .5 * (count[dense] + count[dense - 1] + 1)
 
 
 @_timeit
