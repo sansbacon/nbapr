@@ -219,7 +219,7 @@ def sim(pool: pd.DataFrame,
         n_iterations: int = 500, 
         n_teams: int = 10, 
         n_players: int = 10,
-        statscols: Iterable[str] = ('WFGP', 'WFTP', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'PTS'),
+        statscols: Iterable[str] = ('WFGP', 'FTM', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'TOV', 'PTS'),
         probcol: str = 'probs'
         ) -> pd.DataFrame:
     """Simulates NBA fantasy season

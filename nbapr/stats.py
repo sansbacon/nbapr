@@ -45,14 +45,15 @@ def _clean_stats(df: pd.DataFrame) -> pd.DataFrame:
     return df.loc[:, wanted].reset_index(drop=True)
 
 
-def _fetch(season: str, per_mode: str, last_n: int) -> pd.DataFrame:
+def _fetch(season: str, per_mode: str, last_n: int, timeout: float = .1) -> pd.DataFrame:
     """Fetches nba.com stats - does not implement vast majority of API
 
     Args:
         season (str): in YYYY-YY format, e.g. '2020-21'
         per_mode (st): can be 'Totals', 'PerGame', or 'Per48'
         last_n (int): limit to last_n games
-        
+        timeout (float): raise error after timeout so request won't hang
+
     Returns:
         pd.DataFrame
 
@@ -112,8 +113,9 @@ def _fetch(season: str, per_mode: str, last_n: int) -> pd.DataFrame:
     )
     
     url = 'https://stats.nba.com/stats/leaguedashplayerstats'
-    response = requests.get(url, headers=headers, params=params)
-    data = response.json()
+    r = requests.get(url, headers=headers, params=params, timeout=timeout)
+    r.raise_for_status()
+    data = r.json()
     headers = data['resultSets'][0]['headers']
     players = data['resultSets'][0]['rowSet']
     items = [dict(zip(headers, p)) for p in players]
