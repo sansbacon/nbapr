@@ -232,13 +232,12 @@ def run():
     # run sim with specified parameters
     results = sim(
         pool=pool, 
-        n_iterations=500, 
+        n_iterations=5000, 
         n_teams=10, 
         n_players=12
     )
     
-    pth = Path(__file__).parent.parent / 'data' / 'results.csv'
-    results.sort_values('pts', ascending=False).to_csv(pth, index=False)
+    results.sort_values('pts', ascending=False).to_csv('../data/results.csv', index=False)
 
 
 if __name__ == '__main__':
