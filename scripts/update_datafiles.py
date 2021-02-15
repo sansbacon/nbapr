@@ -237,7 +237,8 @@ def run():
         n_players=12
     )
     
-    results.sort_values('pts', ascending=False).to_csv('../data/results.csv', index=False)
+    fn = Path(__file__).parent.parent / 'data' / 'results.csv'
+    results.sort_values('pts', ascending=False).to_csv(fn, index=False)
 
 
 if __name__ == '__main__':
