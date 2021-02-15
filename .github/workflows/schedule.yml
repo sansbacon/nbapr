@@ -2,7 +2,7 @@ name: update-nbapr-datafiles
 on:
   schedule:
     # You need to set your schedule here
-    - cron: '49 19 * * *'
+    - cron: '9 20 * * *'
 
 jobs:
   pull_data:
