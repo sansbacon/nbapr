@@ -2,7 +2,7 @@ name: update-nbapr-datafiles
 on:
   schedule:
     # You need to set your schedule here
-    - cron: '0 16 * * *'
+    - cron: '32 16 * * *'
 
 jobs:
   pull_data:
@@ -22,7 +22,7 @@ jobs:
 
       # If using Python:
       - name: Install dependencies
-        run: pip install nbapr requests numpy pandas scipy
+        run: pip install nbapr requests numpy pandas
 
       # If using Python:
       - name: Update data
