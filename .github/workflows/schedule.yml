@@ -1,8 +1,13 @@
 name: update-nbapr-datafiles
 on:
-  schedule:
-    # You need to set your schedule here
-    - cron: '03 23 * * *'
+  push:
+    branches:
+      - master
+      - main
+
+  #schedule:
+  #  # You need to set your schedule here
+  #  - cron: '03 23 * * *'
 
 jobs:
   pull_data:

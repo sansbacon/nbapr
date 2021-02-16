@@ -23,7 +23,7 @@ def _clean_stats(df: pd.DataFrame) -> pd.DataFrame:
 
     """
     # filter out unwanted players
-    df = df.loc[df.NBA_FANTASY_PTS >= df.NBA_FANTASY_PTS.mean(), :]
+    #df = df.loc[df.NBA_FANTASY_PTS >= df.NBA_FANTASY_PTS.mean(), :]
 
     # add percentage & probs columns
     df = (
@@ -45,7 +45,7 @@ def _clean_stats(df: pd.DataFrame) -> pd.DataFrame:
     return df.loc[:, wanted].reset_index(drop=True)
 
 
-def _fetch(season: str, per_mode: str, last_n: int, timeout: float = .1) -> pd.DataFrame:
+def _fetch(season: str, per_mode: str, last_n: int, timeout: float = 3.05) -> pd.DataFrame:
     """Fetches nba.com stats - does not implement vast majority of API
 
     Args:
@@ -66,11 +66,9 @@ def _fetch(season: str, per_mode: str, last_n: int, timeout: float = .1) -> pd.D
         'user-agent': 'Mozilla/5.0 (X11; Linux x86_64)',
         'x-nba-stats-origin': 'stats',
         'origin': 'https://www.nba.com',
-        'sec-fetch-site': 'same-site',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-dest': 'empty',
-        'referer': 'https://www.nba.com/',
+        'referer': 'https://stats.nba.com/',
         'accept-language': 'en-US,en;q=0.9,ar;q=0.8',
+        'x-nba-stats-token': 'true'
     }
 
     params = (
