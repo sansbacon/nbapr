@@ -59,15 +59,16 @@ def _fetch(season: str, per_mode: str, last_n: int, timeout: float = 3.05) -> pd
 
     """
     headers = {
-        'authority': 'stats.nba.com',
-        'accept': 'application/json, text/plain, */*',
-        'x-nba-stats-token': 'true',
-        'dnt': '1',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64)',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Host': 'stats.nba.com',
+        'Referer': 'https://stats.nba.com/',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36',
         'x-nba-stats-origin': 'stats',
-        'origin': 'https://www.nba.com',
-        'referer': 'https://stats.nba.com/',
-        'accept-language': 'en-US,en;q=0.9,ar;q=0.8',
         'x-nba-stats-token': 'true'
     }
 
@@ -135,6 +136,9 @@ def get_stats(season: str = '2020-21', per_mode: str = 'Totals', last_n: int = 0
     df = _fetch(season, per_mode, last_n)
     return _clean_stats(df)
 
+
+# GOING TO HAVE TO REWORK THIS TO USE DOUGSTATS
+# THERE IS A TIMEOUT ISSUE WITH nba.com on github
 
 if __name__ == '__main__':
     pass
