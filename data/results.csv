@@ -1,209 +1,482 @@
 player,pts
-Luka Doncic,59.2476
-Nikola Jokic,58.0066
-LeBron James,57.88905592303067
-Nikola Vucevic,55.40606121627064
-Zach LaVine,55.25353491407439
-Julius Randle,54.60579446799919
-Giannis Antetokounmpo,54.344637855142054
-Andre Drummond,53.66659177712874
-Stephen Curry,53.60537439613527
-Zion Williamson,53.51025
-Malcolm Brogdon,53.41051200724966
-Kawhi Leonard,53.25187224669604
-Joel Embiid,52.75164858540736
-Anthony Davis,52.74201127819549
-Damian Lillard,52.626054966457474
-Bam Adebayo,52.44644549763033
-Ben Simmons,52.04130009775171
-John Collins,51.37506864360242
-Fred VanVleet,51.35220338983051
-Trae Young,51.2090991604266
-LaMelo Ball,51.15654993514916
-Khris Middleton,51.096570612050485
-Kevin Durant,50.84983286191823
-Jerami Grant,50.791271347248575
-Andrew Wiggins,50.345098039215685
-Domantas Sabonis,50.115093954248366
-Gordon Hayward,50.064030362389815
-Kyrie Irving,49.72530186608123
-Jrue Holiday,49.6351087562744
-Clint Capela,49.41328365878726
-James Harden,49.27498913515863
-Myles Turner,49.00786037836397
-Malik Beasley,48.94326439351593
-Jayson Tatum,48.55982905982906
-Chris Paul,48.528271834350946
-Donovan Mitchell,48.435471885063166
-Kyle Lowry,48.42011140428027
-Rudy Gobert,48.11341354723708
-Bradley Beal,47.98117204048011
-Jaylen Brown,47.89420686225758
-Chris Boucher,47.865307294658244
-Tobias Harris,47.800915948275865
-Brandon Ingram,47.60678690080683
-Pascal Siakam,47.55169294391315
-Kelly Oubre Jr.,47.50093779306033
-Jordan Clarkson,47.410224438902745
-Keldon Johnson,47.34231847927703
-Harrison Barnes,47.07684210526316
-Shai Gilgeous-Alexander,47.03841946951053
-Terry Rozier,46.99577464788732
-Lonzo Ball,46.843377596186585
-Victor Oladipo,46.73937033430704
-Collin Sexton,46.497156398104266
-Paul George,46.10939226519337
-De'Aaron Fox,46.079032660184495
-Coby White,45.893953934740885
-Justin Holiday,45.71866960676222
-Christian Wood,45.65086614173229
-Kevin Huerter,45.4913471326773
-D'Angelo Russell,45.34103211836882
-Anthony Edwards,45.20873427091043
-Joe Harris,45.078130389789585
-Devin Booker,45.00530752419606
-Mike Conley,44.858857490124585
-Jarrett Allen,44.83284586136297
-DeMar DeRozan,44.763184843830004
-Dejounte Murray,44.61391047976414
-Tyrese Haliburton,44.476885644768856
-Delon Wright,44.26221446700507
-P.J. Washington,44.2534710463935
-Will Barton,44.15270164447925
-Nicolas Batum,44.14967811158798
-RJ Barrett,44.11477721376198
-Kyle Anderson,44.08210059171598
-Mitchell Robinson,44.03929581892486
-Montrezl Harrell,43.76119883983242
-Hamidou Diallo,43.71754068716094
-Aaron Gordon,43.61349809885932
-Devonte' Graham,43.46477923828783
-Kelly Olynyk,43.38347695766205
-Cole Anthony,43.35372340425532
-Dennis Schroder,43.343238034050756
-Norman Powell,43.27063015753939
-Jimmy Butler,43.266816143497756
-Buddy Hield,43.26609511484956
-Tim Hardaway Jr.,43.26355785837651
-Mason Plumlee,43.23707186030893
-Mikal Bridges,43.193809996689836
-Deandre Ayton,43.02308984047019
-John Wall,42.96787968808021
-Larry Nance Jr.,42.896694214876035
-Carmelo Anthony,42.89566772655008
-Kyle Kuzma,42.77276205049732
-Kristaps Porzingis,42.72319434102755
-Jamal Murray,42.66844416562108
-Terrence Ross,42.56868537666174
-Josh Jackson,42.46323247797778
-Lou Williams,42.40590484282073
-Josh Hart,42.40533230293663
-Naz Reid,42.39208103130755
-Luguentz Dort,42.32100991884581
-Cedi Osman,42.00877192982456
-Russell Westbrook,41.981536926147704
-Serge Ibaka,41.856503785271855
-Richaun Holmes,41.85548686244204
-Al Horford,41.78946322067594
-Dillon Brooks,41.70177514792899
-Jonas Valanciunas,41.65846886156287
-Blake Griffin,41.51430457746479
-Ivica Zubac,41.17309269893355
-Khem Birch,41.16542904290429
-Steven Adams,41.02494456762749
-T.J. McConnell,40.90592734225621
-Joe Ingles,40.88179117147708
-Gary Trent Jr.,40.87942955920484
-Bobby Portis,40.7842345505618
-Bojan Bogdanovic,40.73346372688478
-Miles Bridges,40.71711249541957
-OG Anunoby,40.65677061085007
-Immanuel Quickley,40.64755884917175
-Thaddeus Young,40.45996168582376
-Marvin Bagley III,40.39330218068536
-Brook Lopez,40.25251396648045
-Tyus Jones,40.15651801029159
-Marcus Smart,40.02974444909929
-Bismack Biyombo,39.798659269533054
-Jeff Green,39.74704336399474
-Royce O'Neale,39.69947897283215
-Lonnie Walker IV,39.69213539074166
-Patty Mills,39.57939393939394
-Tyler Herro,39.53001644736842
-Garrett Temple,39.441754554170664
-Ja Morant,39.34441233140655
-Taurean Prince,39.306569343065696
-Darius Bazley,39.155567490153956
-DeMarcus Cousins,38.74872499019223
-LaMarcus Aldridge,38.74371980676329
-Danny Green,38.72576736672052
-Lauri Markkanen,38.711558044806516
-Jakob Poeltl,38.707584050039095
-CJ McCollum,38.60805341966815
-Alec Burks,38.47330764997248
-Shake Milton,38.472197705207414
-DeAndre Jordan,38.37029042386185
-Paul Millsap,38.34707971586425
-Rudy Gay,38.18517049960349
-Monte Morris,38.063946150610015
-Goran Dragic,38.03963110667996
-Derrick Rose,38.00957049486461
-Andre Iguodala,37.90021459227468
-Daniel Theis,37.88629914876368
-Jae'Sean Tate,37.84254709254709
-De'Andre Hunter,37.82869249394673
-Luke Kennard,37.806390977443606
-Kendrick Nunn,37.71167883211679
-Cameron Johnson,37.70421006944444
-Willie Cauley-Stein,37.699945887445885
-Robert Covington,37.57967618236046
-Marc Gasol,37.42450611476952
-Enes Kanter,37.38617121354657
-James Wiseman,37.384547461368655
-Sterling Brown,37.32823470411234
-Damion Lee,37.303886010362696
-Patrick Williams,37.2992700729927
-Jarred Vanderbilt,37.28183023872679
-Derrick Favors,37.27721402214022
-Isaiah Stewart,37.27720065609623
-Nerlens Noel,37.21076458752515
-Wendell Carter Jr.,37.20880535530381
-Josh Richardson,37.186734693877554
-Nickeil Alexander-Walker,36.917447018235585
-Kent Bazemore,36.90431266846361
-Darius Garland,36.881064834693
-Jalen Brunson,36.60396475770925
-Ricky Rubio,36.420864819479426
-Devin Vassell,36.38184747583244
-Michael Porter Jr.,36.34666986104456
-P.J. Tucker,36.28560291060291
-Seth Curry,36.267336683417085
-Jae Crowder,36.252821670428894
-Cam Reddish,36.18706536856745
-Brandon Clarke,36.17783273381295
-Tristan Thompson,36.056247008137866
-Derrick Jones Jr.,35.97864864864865
-Elfrid Payton,35.86739745403112
-Tyrese Maxey,35.81687657430731
-Timothe Luwawu-Cabarrot,35.55846235985051
-Draymond Green,35.318977841315224
-Eric Bledsoe,35.1797385620915
-Denzel Valentine,35.17596810933941
-Eric Gordon,35.173007609130956
-Donte DiVincenzo,34.82492236024845
-James Johnson,34.6059709521248
-Otto Porter Jr.,34.5386301369863
-JaMychal Green,34.537844611528826
-Caris LeVert,34.33544921875
-Duncan Robinson,34.26048284625159
-Reggie Jackson,33.70516717325228
-David Nwaba,33.59007633587786
-Mike Muscala,33.584851936218676
-Doug McDermott,33.45538215286115
-Rui Hachimura,33.251395089285715
-Reggie Bullock,32.90256959314775
-Dwayne Bacon,32.49210288808664
-Bruce Brown,32.46930533117932
-Dwight Howard,32.40670812972012
-Evan Fournier,31.287061288632792
-Eric Paschall,29.045199326221223
+"jokic,nikola",65.7142
+"james,lebron",64.4126
+"lillard,damian",63.93646666666667
+"antetokounmpo,g",63.8951
+"curry,stephen",63.245
+"lavine,zach",63.019733333333335
+"doncic,luka",62.858066666666666
+"vucevic,nikola",61.548066666666664
+"young,trae",61.447466666666664
+"embiid,joel",61.276266666666665
+"leonard,kawhi",60.13625719255988
+"sabonis,domanta",59.98983333333333
+"adebayo,bam",59.66817818084822
+"harden,james",59.31523333333333
+"vanvleet,fred",59.148843256217084
+"brogdon,malcolm",58.96673333333333
+"gobert,rudy",58.68981265417695
+"beal,bradley",58.538666666666664
+"ingram,brandon",58.52403493566238
+"randle,julius",57.99913333333333
+"davis,anthony",57.48774129914048
+"drummond,andre",57.10350060704168
+"grant,jerami",56.876819821023105
+"brown,jaylen",56.639537230106946
+"williamson,zion",56.14516236580649
+"fox,de'aaron",55.923740958100176
+"irving,kyrie",55.479864433811805
+"durant,kevin",55.29678099851551
+"allen,jarrett",55.020886421550784
+"simmons,ben",54.760868065139384
+"siakam,pascal",54.585395164710874
+"turner,myles",54.523899263320196
+"middleton,khris",54.415281050151464
+"johnson,keldon",54.38668612257221
+"beasley,malik",54.13178707224335
+"tatum,jayson",54.03218454313143
+"harris,tobias",53.917920115149336
+"lowry,kyle",53.89632414369257
+gilgeous-alexan,53.736987638256345
+"kanter,enes",53.672894148341406
+"hayward,gordon",53.63000584624379
+"mitchell,donova",53.58772819472617
+"derozan,demar",53.529302670623146
+"anderson,kyle",53.44365355357531
+"george,paul",52.950004516303856
+"capela,clint",52.84986467705362
+"rozier,terry",52.82733534222987
+"wright,delon",52.62738788436
+"ball,lamelo",51.943503246510936
+"sexton,collin",51.931144765309
+"bridges,mikal",51.82333553065261
+"collins,john",51.730726698262245
+"wiggins,andrew",51.502150809716596
+"holiday,jrue",51.38
+"murray,dejounte",51.34031049664015
+"adams,steven",51.312615587846764
+"boucher,chris",51.06695799266986
+"edwards,anthony",50.963554463554466
+"schroder,dennis",50.888279714492604
+"paul,chris",50.861359181006314
+"barrett,rj",50.786000982961994
+"clarkson,jordan",50.77657691232647
+"murray,jamal",50.31290239505537
+"hield,buddy",50.16542865985763
+"booker,devin",50.11320144217436
+"wood,christian",49.832860687699394
+"barnes,harrison",49.76778282255013
+"graham,devonte'",49.75091374269006
+"harris,joe",49.68335065234961
+"harrell,montrez",49.6221928665786
+"young,thaddeus",49.57852869186837
+"ibaka,serge",49.416666666666664
+"conley,mike",49.361005538060596
+"oubre,kelly",49.11605653155364
+"kuzma,kyle",49.04108516092281
+"haliburton,tyre",49.007514728868586
+"lopez,brook",48.96032821439326
+"westbrook,russe",48.86372197309417
+"ayton,deandre",48.853778573171724
+"diallo,hamidou",48.778852920478535
+"ross,terrence",48.66081661891118
+"hardaway,tim",48.62511199283246
+"holmes,richaun",48.59204720935363
+"ball,lonzo",48.556873885918
+"white,coby",48.35710014947683
+"valanciunas,jon",48.33314278455285
+"brooks,dillon",48.266229029905176
+"huerter,kevin",48.125689944804414
+"jackson,josh",48.119949890385215
+"robinson,mitche",48.083666333666336
+"bazley,darius",48.01980142164053
+"bridges,miles",47.82497807658579
+"divincenzo,dont",47.805183459522425
+"covington,rober",47.73443534682527
+"butler,jimmy",47.626504642898084
+"zubac,ivica",47.555438859714926
+"holiday,justin",47.533372595210054
+"wall,john",47.43911416094822
+"cousins,demarcu",47.430551666199946
+"russell,d'angel",47.428975741239896
+"bogdanovic,boja",47.26551305403765
+"jordan,deandre",47.15348429277627
+"hart,josh",47.07330623306233
+"reid,naz",46.87283198728982
+"green,draymond",46.764322916666664
+"gordon,eric",46.741025641025644
+"oladipo,victor",46.70593090437448
+"portis,bobby",46.597344619666046
+"plumlee,mason",46.45493981130029
+"batum,nicolas",46.23137423137423
+"washington,pj",46.20001326787847
+"gordon,aaron",45.83699692904477
+"trent,gary",45.77043407043407
+"bledsoe,eric",45.75567867036011
+"tate,jae'sean",45.711625794732065
+"mcconnell,t.j.",45.7060647307925
+"rubio,ricky",45.69589081738614
+"gay,rudy",45.6507681917947
+"dort,luguentz",45.63403849488469
+"williams,lou",45.60690423162583
+"horford,al",45.497572458437546
+"o'neale,royce",45.4486821086262
+"johnson,cameron",45.36324871082903
+"garland,darius",45.34994300602508
+"herro,tyler",45.333073543998864
+"ingles,joe",45.269159023783615
+"powell,norman",45.22785168412114
+"jones,tyus",44.97302863868184
+"green,danny",44.912667410714285
+"payton,elfrid",44.85475702399614
+"crowder,jae",44.749481425608145
+"porzingis,krist",44.65212464589235
+"mccollum,cj",44.53925298288086
+"birch,khem",44.43676988689041
+"osman,cedi",44.30190336749634
+"robinson,duncan",44.15411365564037
+"olynyk,kelly",44.13602279544091
+"mills,patty",44.029456967213115
+"anthony,carmelo",43.87518409425626
+"vanderbilt,jarr",43.80722652372444
+"millsap,paul",43.726535836177476
+"green,jeff",43.668722786647315
+"barton,will",43.29251644736842
+"mcdermott,doug",43.128698722259585
+"poeltl,jakob",43.094206466436894
+"theis,daniel",42.98805997778601
+"jackson,reggie",42.9396767584794
+"morris,monte",42.84207317073171
+"bagley,marvin",42.83668787923635
+"smart,marcus",42.71982020547945
+"hunter,de'andre",42.656893967778196
+"morant,ja",42.59761824890976
+"clarke,brandon",42.517747630551945
+"quickley,immanu",42.42726759503199
+"aldridge,lamarc",42.13409151018249
+"favors,derrick",42.08429962894249
+"brown,sterling",41.83170731707317
+"anthony,cole",41.64532420984034
+"reddish,cam",41.56574692821729
+"curry,seth",41.55138888888889
+"griffin,blake",41.461731116008814
+"williams,patric",41.26871381306865
+"temple,garrett",41.087892483349194
+"howard,dwight",41.03612479474548
+"jones,derrick",40.895328208160855
+"thompson,trista",40.86158485856905
+"nance,larry",40.79519832985386
+"rose,derrick",40.68891454965358
+"prince,taurean",40.61259628454916
+"green,jamychal",40.49872861766065
+"bacon,dwayne",40.37263969171484
+"brunson,jalen",40.36554965263588
+"biyombo,bismack",40.35052604567616
+"milton,shake",40.32949623888762
+"anunoby,og",40.29489526133821
+"wiseman,james",40.10019743336624
+"joseph,cory",40.080268880980626
+"gasol,marc",40.047693178601754
+"porter,michael",39.87556663644606
+"levert,caris",39.760678582247806
+"kennard,luke",39.633421206795546
+"bertans,davis",39.37866108786611
+"walker,lonnie",39.23024193548387
+alexander-walke,39.0436649964209
+"hachimura,rui",38.96388319672131
+"achiuwa,preciou",38.87461240310078
+"lee,damion",38.782792427315755
+"fournier,evan",38.675548112058465
+"zeller,cody",38.424896733007884
+"dragic,goran",38.07655502392345
+"nwaba,david",37.95570306150095
+"bey,saddiq",37.67189521345408
+"brown,bruce",37.625
+"roby,isaiah",37.62484700122399
+"beverley,patric",37.35782967032967
+"lopez,robin",37.28496319663512
+"nunn,kendrick",37.28420912243265
+"morris,marcus",37.25303883782983
+"noel,nerlens",37.2106938255888
+luwawu-cabarrot,37.16526610644258
+"muscala,mike",37.14079690752305
+"valentine,denze",37.0854159534406
+"mclemore,ben",37.0
+"bullock,reggie",36.96740506329114
+"bazemore,kent",36.9452566096423
+"maxey,tyrese",36.5469776609724
+"markkanen,lauri",36.541882109617376
+"carter,wendell",36.47279289283731
+"richardson,josh",36.313265306122446
+"stewart,isaiah",36.30439932318105
+"allen,grayson",36.07677450507001
+"iguodala,andre",36.00769230769231
+"paschall,eric",35.983348069554964
+"lamb,jeremy",35.952715355805246
+"towns,karl-anth",35.87264673311185
+"williams,kenric",35.82605633802817
+"connaughton,pat",35.74092344119968
+"tucker,p.j.",35.41403162055336
+"burks,alec",35.28655834564254
+"finney-smith,do",35.2703125
+"johnson,james",34.723599405057016
+"williams,robert",34.70748299319728
+"maledon,theo",34.66717325227963
+"vassell,devin",34.61986143187067
+"cauley-stein,wi",34.573106520858644
+"caldwell-pope,k",34.54651162790697
+"mcgee,javale",34.272125723738625
+"holiday,aaron",33.971287572902646
+"whiteside,hassa",33.89675516224189
+"okoro,isaac",33.815251222765674
+"walker,kemba",33.68817204301075
+"burke,trey",33.63711641500244
+"porter,otto",33.504294478527605
+"simons,anfernee",33.401835798062216
+"tillman,xavier",32.9794728839331
+"baynes,aron",32.85625
+"horton-tucker,t",32.56722475900558
+"avdija,deni",32.367554151624546
+"smith,ish",32.27961672473867
+"ellington,wayne",32.26303475935829
+"wanamaker,brad",32.02019068984857
+"dieng,gorgui",32.01450511945392
+"kaminsky,frank",32.00813008130081
+"bane,desmond",31.77815805849409
+"forbes,bryn",31.74025513819986
+"harris,gary",31.73345323741007
+"shamet,landry",31.683151718357085
+"dotson,damyean",31.623642943305185
+"gafford,daniel",31.34396551724138
+"pritchard,payto",31.31151035322777
+"house,danueljr",31.10639127045986
+"ennis,james",31.06505728314239
+"mcdaniels,jaden",30.46804835924007
+"neto,raul",30.37394636015326
+"augustin,d.j.",30.31113195747342
+"kleber,maxi",30.1972049689441
+"mykhailiuk,svia",29.990330378726835
+"thybulle,matiss",29.920133111480865
+"martin,caleb",29.565582959641254
+"redick,jj",29.47794928335171
+"len,alex",29.322097378277153
+"mann,terance",29.29490022172949
+"nurkic,jusuf",29.27768385460693
+"matthews,wesley",29.166666666666668
+"caruso,alex",29.15568181818182
+"ojeleye,semi",29.021840148698885
+"layman,jake",29.0
+"teague,jeff",28.880208333333332
+"culver,jarrett",28.637626262626263
+"hill,solomon",28.5203488372093
+"okogie,josh",28.479041916167663
+"hill,george",28.47835195530726
+"nowell,jaylen",28.25
+"dozier,pj",28.14849187935035
+"mclaughlin,jorda",28.062888198757765
+"satoransky,toma",28.043046357615893
+toscano-anderso,28.03484602917342
+"hayes,jaxson",28.0
+"rivers,austin",27.939560439560438
+"williams,grant",27.848794063079776
+"campazzo,facund",27.760377358490565
+"niang,georges",27.64745308310992
+"johnson,stanley",27.53731343283582
+"looney,kevon",27.396135265700483
+"melton,de'antho",27.124365482233504
+"korkmaz,furkan",27.025
+"morris,markieff",26.99404761904762
+"clark,gary",26.870689655172413
+"hernangomez,wil",26.76388888888889
+"jackson,justin",26.414285714285715
+"giles,harry",26.407608695652176
+"bryant,thomas",26.406521739130437
+"mathews,garriso",26.166666666666668
+"knox,kevin",26.136363636363637
+"payne,cameron",26.130434782608695
+"gallinari,danil",26.040268456375838
+"monk,malik",25.9811320754717
+"hood,rodney",24.8
+"davis,terence",24.65740740740741
+"davis,ed",23.9375
+"windler,dylan",19.0
+"goodwin,brandon",18.0
+"adams,jaylen",
+"alexander,ty-sh",
+"aminu,al-farouq",
+"antetokounmpo,k",
+"antetokounmpo,t",
+"arcidiacono,rya",
+"azubuike,udoka",
+"bamba,mo",
+"bates-diop,keit",
+"bell,jordan",
+"bembry,deandre'",
+"bey,tyler",
+"bitadze,goga",
+"bjelica,nemanja",
+"blevins,keljin",
+"bogdanovic,bogd",
+"bol,bol",
+"bolden,marques",
+"bone,jordan",
+"bonga,isaac",
+"bowen,brian",
+"bradley,avery",
+"bradley,tony",
+"brantley,jarrel",
+"brazdeikis,igna",
+"brown,moses",
+"brown,troy",
+"caboclo,bruno",
+"cacok,devontae",
+"cancar,vlatko",
+"carey,vernon",
+"carter,jevon",
+carter-williams,
+"chiozza,chris",
+"chriss,marquese",
+"coffey,amir",
+"cook,quinn",
+"craig,torrey",
+"dinwiddie,spenc",
+"dotson,devon",
+"doumbouya,sekou",
+"dudley,jared",
+"edwards,carsen",
+"elleby,cj",
+"eubanks,drew",
+"exum,dante",
+"fall,tacko",
+"felicio,cristia",
+"ferguson,terran",
+"fernando,bruno",
+"ferrell,yogi",
+"flynn,malachi",
+"forrest,trent",
+"frazier,tim",
+"fultz,markelle",
+"gabriel,wenyen",
+"galloway,langst",
+"gibson,taj",
+"gill,anthony",
+"green,javonte",
+"green,josh",
+"guy,kyle",
+"hagans,ashton",
+"hall,josh",
+"hampton,rj",
+"harkless,mauric",
+"harper,jared",
+"harris,jalen",
+"harrison,shaqui",
+"hartenstein,isa",
+"hayes,killian",
+"hernangomez,jua",
+"hinton,nate",
+"howard,markus",
+"hughes,elijah",
+"hutchison,chand",
+"iwundu,wes",
+"jackson,frank",
+"james,justin",
+"jeffries,daquan",
+"joe,isaiah",
+"johnson,tyler",
+"jones,damian",
+"jones,mason",
+"jones,tre",
+"kabengele,mfion",
+"knight,nathan",
+"konchar,john",
+"kornet,luke",
+"kurucs,rodions",
+"lecque,jalen",
+"lee,saben",
+"leonard,meyers",
+"lewis,kira",
+"little,nassir",
+"love,kevin",
+"lyles,trey",
+"maker,thon",
+"mane,karim",
+"mannion,nico",
+"marjanovic,boba",
+"marshall,naji",
+"martin,cody",
+"martin,kelan",
+"martin,kenyonjr",
+"mason,frank",
+"mathias,dakota",
+"mays,skylar",
+"mcdaniels,jalen",
+"mcdermott,sean",
+"mcgruder,rodney",
+"mckinnie,alfonz",
+"melli,nicolo",
+"merrill,sam",
+"metu,chimezie",
+"miller,darius",
+"mokoka,adam",
+"moore,e'twaun",
+"morgan,juwan",
+"mulder,mychal",
+"nader,abdel",
+"nesmith,aaron",
+"nnaji,zeke",
+"ntilikina,frank",
+"nwora,jordan",
+"okafor,jahlil",
+"okeke,chuma",
+"okongwu,onyeka",
+"okpala,kz",
+"oni,miye",
+"oturu,daniel",
+"pasecniks,anzej",
+"patterson,patri",
+"pelle,norvel",
+"perry,reggie",
+"pinson,theo",
+"poirier,vincent",
+"pokusevski,alek",
+"poole,jordan",
+"powell,dwight",
+"ramsey,jahmi'us",
+"randle,chasson",
+"reed,paul",
+"richards,nick",
+"robinson,glenn",
+"robinson,jerome",
+"rondo,rajon",
+"samanic,luka",
+"sampson,jakarr",
+"saric,dario",
+"scott,mike",
+"silva,chris",
+"sirvydis,deivid",
+"smith,dennis",
+"smith,jalen",
+"snell,tony",
+"spalding,ray",
+"stanley,cassius",
+"stevens,lamar",
+"strus,max",
+"sumner,edmond",
+"terry,tyrell",
+"thomas,brodric",
+"thomas,matt",
+"thornwell,sinda",
+"toppin,obi",
+"vincent,gabe",
+"vonleh,noah",
+"wade,dean",
+"wagner,moritz",
+"warren,t.j.",
+"watanabe,yuta",
+"waters,tremont",
+"watson,paul",
+"weatherspoon,qu",
+"white,derrick",
+"wilson,d.j.",
+"winston,cassius",
+"woodard,robert",

@@ -3,9 +3,7 @@
 # Copyright (C) 2021 Eric Truett
 # Licensed under the MIT License
 
-from io import StringIO
 from pathlib import Path
-import pandas as pd
 from nbapr import sim
 from nbapr.stats import get_stats
 
@@ -13,7 +11,7 @@ from nbapr.stats import get_stats
 def run():
     """Runs update script"""
     
-    pool = get_stats()        
+    pool = get_stats(season='20-21')        
 
     # run sim with specified parameters
     results = sim(
