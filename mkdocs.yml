@@ -23,6 +23,10 @@ markdown_extensions:
 nav:
 - nbapr: index.md
 - history-design-future.md
+- Player Rater : 
+    - 8 Cat Player Rater: player-rater-8cat.md 
+    - 9 Cat Player Rater: player-rater-9cat.md 
+    - 9 Cat FTM Player Rater: player-rater-9catftm.md 
 - Code Reference:
     - nbapr: nbapr-reference.md
 
