@@ -9,7 +9,7 @@ $(document).ready(function() {
     "ajax": url,
     "iDisplayLength": 250,
     "dom": '<"pull-left"f><"pull-right"l>t',
-    "order": [1, 'desc'],
+    "order": [3, 'desc'],
     "columnDefs": [
         {"className": "dt-center", "targets": "_all"}
       ]
@@ -30,12 +30,16 @@ $(document).ready(function() {
     <thead>
         <tr>
             <th>Player</th>
+            <th>Pos</th>
+            <th>Team</th>
             <th>Points</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>Player</th>
+            <th>Pos</th>
+            <th>Team</th>
             <th>Points</th>
         </tr>
     </tfoot>

@@ -144,6 +144,9 @@ def _clean_doug(df):
     # address empty rows
     df = df.dropna(thresh=3)
 
+    # fix teams
+    df.loc[:, 'TEAM'] = df.loc[:, 'TEAM'].str.upper()
+
     # make numeric columns
     for c in df.columns[3:]:
         df.loc[:, c] = pd.to_numeric(df.loc[:, c], errors='coerce').fillna(0)
@@ -170,7 +173,7 @@ def _clean_doug(df):
     
     # filter columns
     # need to reset index for sampling to work correctly
-    wanted = ['PLAYER_NAME', 'TEAM', 'GP', 'MIN', 'FGM', 'FGA', 
+    wanted = ['PLAYER_NAME', 'TEAM', 'POS', 'GP', 'MIN', 'FGM', 'FGA', 
               'FG_PCT', 'WFGP', 'FG3M', 'FG3A', 'FTM', 'FTA', 
               'FT_PCT', 'WFTP', 'REB', 'AST', 'TOV', 'STL', 'BLK', 'PTS', 'probs']
 

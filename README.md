@@ -4,6 +4,10 @@ nbapr is a python-based player rater for nba fantasy. It uses simulation rather 
 
 ---
 
+**8-Category Player Rater**: <a href="https://sansbacon.github.io/nbapr/player-rater-8cat/">https://sansbacon.github.io/nbapr/player-rater-8cat/</a>
+
+**9-Category Player Rater**: <a href="https://sansbacon.github.io/nbapr/player-rater-9cat/">https://sansbacon.github.io/nbapr/player-rater-9cat/</a>
+
 **Documentation**: <a href="https://sansbacon.github.io/nbapr/">https://sansbacon.github.io/nbapr/</a>
 
 **Source Code**: <a href="https://github.com/sansbacon/nbapr" target="_blank">https://github.com/sansbacon/nbapr</a>

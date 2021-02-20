@@ -264,7 +264,12 @@ def sim(pool: pd.DataFrame,
     player_mean = np.nanmean(player_points, axis=0)
 
     # return results
-    return pd.DataFrame({'player': pool.PLAYER_NAME.values, 'pts': player_mean})
+    return pd.DataFrame({
+        'player': pool.PLAYER_NAME,
+        'pos': pool.POS,
+        'team': pool.TEAM, 
+        'pts': player_mean
+    })
 
 
 if __name__ == '__main__':
