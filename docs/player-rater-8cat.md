@@ -9,6 +9,7 @@ $(document).ready(function() {
     "ajax": url,
     "iDisplayLength": 250,
     "dom": '<"pull-left"f><"pull-right"l>t',
+    "order": [1, 'desc'],
     "columnDefs": [
         {"className": "dt-center", "targets": "_all"}
       ]
