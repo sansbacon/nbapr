@@ -25,7 +25,7 @@ def run():
     for catname, catstats in mapping.items():
         results = sim(
             pool=pool,
-            n_iterations=1000, 
+            n_iterations=20000, 
             n_teams=10, 
             n_players=12,
             statscols=catstats
