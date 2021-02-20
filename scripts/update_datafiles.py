@@ -30,7 +30,7 @@ def run():
             statscols=catstats
         )
 
-        results = results.sort_values('pts', ascending=False)
+        results = results.dropna().sort_values('pts', ascending=False)
 
         # address rounding issue
         results.loc[:, 'pts'] = results.loc[:, 'pts'].round(2).astype(str)
