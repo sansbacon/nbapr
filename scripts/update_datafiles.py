@@ -30,7 +30,7 @@ def run():
             statscols=catstats
         )
 
-        results = results.dropna().sort_values('pts', ascending=False)
+        results = results.sort_values('pts', ascending=False)
 
         # address rounding issue
         results.loc[:, 'pts'] = results.loc[:, 'pts'].round(2).astype(str)
@@ -42,7 +42,7 @@ def run():
         # save to disk
         pth = Path(__file__).parent.parent / 'data' / f'player-rater-{catname}.json'
         with pth.open('w') as f:
-            data = {'data': results.values.tolist()}
+            data = {'data': results.dropna().values.tolist()}
             json.dump(data, f)
 
 

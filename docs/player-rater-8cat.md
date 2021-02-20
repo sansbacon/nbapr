@@ -9,17 +9,10 @@ $(document).ready(function() {
     "ajax": url,
     "iDisplayLength": 250,
     "dom": '<"pull-left"f><"pull-right"l>t',
-    "order": [1, 'desc'],
     "columnDefs": [
         {"className": "dt-center", "targets": "_all"}
       ]
     } );
-
-  oTable.$('th').tooltip( {
-      "delay": 0,
-      "track": true,
-      "fade": 250
-  } );
 
   $.fn.dataTable.ext.errMode = 'none';
   $('#pr')
