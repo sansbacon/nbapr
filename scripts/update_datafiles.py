@@ -21,19 +21,28 @@ def run():
 
     pool = get_stats(season='20-21')        
 
-    # NEED TO RUN SIM 3 TIMES
     for catname, catstats in mapping.items():
         results = sim(
             pool=pool,
-            n_iterations=20000, 
+            n_iterations=100, 
             n_teams=10, 
             n_players=12,
             statscols=catstats
         )
-    
+
+        results = results.dropna().sort_values('pts', ascending=False)
+
+        # address rounding issue
+        results.loc[:, 'pts'] = results.loc[:, 'pts'].round(2).astype(str)
+
+        # fix names
+        names = results['player'].str.split(',', expand=True)
+        results.loc[:, 'player'] = names[1].str[0].str.upper() + ' ' + names[0].str.title()
+
+        # save to disk
         pth = Path(__file__).parent.parent / 'data' / f'player-rater-{catname}.json'
         with pth.open('w') as f:
-            data = {'data': results.dropna().sort_values('pts', ascending=False).values.tolist()}
+            data = {'data': results.values.tolist()}
             json.dump(data, f)
 
 
