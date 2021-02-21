@@ -53,7 +53,7 @@ def run(pool_file, n_iterations, n_teams, n_players, league_type):
         statscols=statscols
     )
     
-    print(results)
+    print(results.sort_values('pts'), ascending=False)
 
 
 if __name__ == '__main__':
