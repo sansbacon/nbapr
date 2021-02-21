@@ -1,1 +1,1 @@
-from .nbapr import sim
+from .nbapr import sim, pr_traditional

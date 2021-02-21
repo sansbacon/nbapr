@@ -26,21 +26,4 @@ $(document).ready(function() {
 
 # NBA Player Rater: 8 Category
 
-<table id="pr" class="display">
-    <thead>
-        <tr>
-            <th>Player</th>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Points</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Player</th>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Points</th>
-        </tr>
-    </tfoot>
-</table>
+{% include 'table.md' %}

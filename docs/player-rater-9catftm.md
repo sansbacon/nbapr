@@ -32,21 +32,5 @@ $(document).ready(function() {
 
 # NBA Player Rater: 9 Category (Free Throws Made, not FT%)
 
-<table id="pr" class="display">
-    <thead>
-        <tr>
-            <th>Player</th>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Points</th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <th>Player</th>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Points</th>
-        </tr>
-    </tfoot>
-</table>
+{% include 'table.md' %}
+

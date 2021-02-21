@@ -6,6 +6,7 @@
 import logging
 import time
 from typing import Iterable, Union
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -212,6 +213,58 @@ def _create_teamstats(
     # sum along axis 2 to get team totals
     # has shape (n_iterations, n_teams, len(statcols))
     return np.sum(team_stats, axis=2)
+
+
+def _zscore(a, axis=0, ddof=0, nan_policy='propagate'):
+    """Added from scipy to remove dependency
+
+    Args:
+        a (np.ndarray): array like object containing the sample data.
+        axis (int): default 0
+
+    Returns:
+        np.ndarray
+
+    """
+    mn = a.mean(axis=axis, keepdims=True)
+    std = a.std(axis=axis, ddof=ddof, keepdims=True)
+    first = np.take_along_axis(a, np.array(0, ndmin=a.ndim), axis)
+    isconst = (first == a).all(axis=axis, keepdims=True)
+
+    # Set std deviations that are 0 to 1 to avoid division by 0.
+    std[isconst] = 1.0
+    z = (a - mn) / std
+
+    # Set the outputs associated with a constant input to nan.
+    z[np.broadcast_to(isconst, z.shape)] = np.nan
+    return z
+
+
+def pr_traditional(pool: pd.DataFrame, 
+        statscols: Iterable[str] = ('WFGP', 'FTM', 'FG3M', 'REB', 'AST', 'STL', 'BLK', 'TOV', 'PTS'),
+        ) -> pd.DataFrame:
+    """Traditional player rater
+    
+    Args:
+        pool (pd.DataFrame): the player pool dataframe
+        statscols (Iterable[str]): the stats columns
+
+    Returns:
+        pd.DataFrame with columns
+           player[str], pts[float]
+
+    """
+    pool = pool.dropna()
+    stats = pool.loc[:, statscols].values
+    pts = np.sum(_zscore(stats), axis=1)
+
+    # return results
+    return pd.DataFrame({
+        'player': pool.PLAYER_NAME,
+        'pos': pool.POS,
+        'team': pool.TEAM, 
+        'pr_zscore': pts
+    })
 
 
 @_timeit

@@ -10,6 +10,7 @@ theme:
 plugins:
   - search
   - mkdocstrings
+  - macros
 
 markdown_extensions:
 - toc:
